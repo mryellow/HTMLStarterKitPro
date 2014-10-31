@@ -23,8 +23,32 @@ module.exports = function( grunt ) {
         }
     };
 
+    var path = require('path');
+
     grunt.initConfig({
             pkg: grunt.file.readJSON('package.json'),
+            bower: {
+                install: {
+                    options: {
+                        targetDir: 'lib/',
+                        install: true,
+                        copy: true,
+                        verbose: false,
+                        cleanTargetDir: false,
+                        cleanBowerDir: false,
+                        bowerOptions: {}
+                    }
+                },
+                cleanup: {
+                    options: {
+                        cleanTargetDir: true,
+                        cleanBowerDir: false,
+                        install: false,
+                        copy: false
+                    }
+                }
+            },
+
             clean: {
                 build: ['build/*']
             },
@@ -47,6 +71,10 @@ module.exports = function( grunt ) {
                 }
             },
             copy: {
+                bowerjs: {
+                    src: 'bower_components/**/*.js',
+                    dest: 'lib/'
+                },
                 lib: {
                     src: 'lib/**/**',
                     dest: 'build/'
@@ -139,6 +167,7 @@ module.exports = function( grunt ) {
     );
 
 // Loading plugin(s)
+    grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-copy');
@@ -149,7 +178,7 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks('grunt-open');
     grunt.loadNpmTasks('grunt-durandal');
 
-    grunt.registerTask('default', ['jshint', 'jasmine:dev', 'connect:dev:livereload', 'open:dev', 'watch:dev']);
-    grunt.registerTask('build', ['jshint', 'jasmine:dev', 'clean', 'copy', 'durandal:main', 'uglify', 'jasmine:build', 'connect:build', 'open:build', 'watch:build']);
+    grunt.registerTask('default', ['bower','jshint', 'jasmine:dev', 'connect:dev:livereload', 'open:dev', 'watch:dev']);
+    grunt.registerTask('build', ['bower','jshint', 'jasmine:dev', 'clean', 'copy', 'durandal:main', 'uglify', 'jasmine:build', 'connect:build', 'open:build', 'watch:build']);
 
 };

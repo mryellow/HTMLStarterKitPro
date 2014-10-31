@@ -1,0 +1,25 @@
+{
+  "name": "HTMLStarterKitPro",
+  "version": "2.0.0",
+  "homepage": "https://github.com/mryellow/HTMLStarterKitPro",
+  "authors": [
+    "mryellow <mr-yellow@mr-yellow.com>"
+  ],
+  "main": "app/main.js",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "durandal": "~2.1.0",
+    "bootstrap": "~3.3.0",
+    "font-awesome": "~4.2.0"
+  }
+}
