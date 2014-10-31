@@ -14,9 +14,9 @@ module.exports = function( grunt ) {
     var requireConfig = {
         baseUrl: 'app/',
         paths: {
-            'jquery': '../lib/jquery/jquery-1.9.1',
-            'knockout': '../lib/knockout/knockout-2.3.0.debug',
-            'text': '../lib/require/text',
+            'jquery': '../lib/jquery/jquery.min',
+            'knockout': '../lib/knockout.js/knockout',
+            'text': '../lib/requirejs-text/text',
             'durandal': '../lib/durandal/js',
             'plugins': '../lib/durandal/js/plugins',
             'transitions': '../lib/durandal/js/transitions'
@@ -28,6 +28,14 @@ module.exports = function( grunt ) {
     grunt.initConfig({
             pkg: grunt.file.readJSON('package.json'),
             bower: {
+                cleanup: {
+                    options: {
+                        cleanTargetDir: true,
+                        cleanBowerDir: false,
+                        install: false,
+                        copy: false
+                    }
+                },
                 install: {
                     options: {
                         targetDir: 'lib/',
@@ -38,17 +46,8 @@ module.exports = function( grunt ) {
                         cleanBowerDir: false,
                         bowerOptions: {}
                     }
-                },
-                cleanup: {
-                    options: {
-                        cleanTargetDir: true,
-                        cleanBowerDir: false,
-                        install: false,
-                        copy: false
-                    }
                 }
             },
-
             clean: {
                 build: ['build/*']
             },
@@ -71,10 +70,6 @@ module.exports = function( grunt ) {
                 }
             },
             copy: {
-                bowerjs: {
-                    src: 'bower_components/**/*.js',
-                    dest: 'lib/'
-                },
                 lib: {
                     src: 'lib/**/**',
                     dest: 'build/'
